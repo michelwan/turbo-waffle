@@ -7,43 +7,49 @@ namespace TurboWaffle.Presenter
 {
     public class AccountingPresenter
     {
-        private AccountingModel m_Model;
+        private AccountingModel _model;
 
         public AccountingPresenter(AccountingModel model)
         {
-            this.m_Model = model;
+            this._model = model;
         }
 
         public void Add(int fkFlowType, int fkCategory, string description, decimal amount)
         {
-            m_Model.AddInput(fkFlowType, fkCategory, description, amount);
+            _model.AddInput(fkFlowType, fkCategory, description, amount);
         }
 
         public void Update(int id, int fkFlowType, int fkCategory, string description, decimal amount)
         {
-            m_Model.UpdateInput(id, fkFlowType, fkCategory, description, amount);
+            _model.UpdateInput(id, fkFlowType, fkCategory, description, amount);
+        }
+
+        public IEnumerable<InputView> GetInputs()
+        {
+            return _model.GetInputs()
+                .Select(i => new InputView(i.Id, i.FkFlowType, i.FkCategory,  i.Description, i.Amount));
         }
 
         public IEnumerable<CategoryView> GetCategories()
         {
-            return m_Model.GetCategories()
+            return _model.GetCategories()
                 .Select(i => new CategoryView(i.Id, i.Description));
         }
 
         public IEnumerable<FlowTypeView> GetFlowTypes()
         {
-            return m_Model.GetFlowTypes()
+            return _model.GetFlowTypes()
                 .Select(i => new FlowTypeView(i.Id, i.Description));
         }
 
         public string GetCategoryDescription(int id)
         {
-            return m_Model.GetCategoryById(id).Description;
+            return _model.GetCategoryById(id).Description;
         }
 
         public string GetFlowTypeDescription(int id)
         {
-            return m_Model.GetFlowTypeById(id).Description;
+            return _model.GetFlowTypeById(id).Description;
         }
     }
 }

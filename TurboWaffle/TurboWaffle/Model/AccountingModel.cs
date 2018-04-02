@@ -54,6 +54,11 @@ namespace TurboWaffle.Model
         }
         #endregion Raise events
 
+        public IList<InputModel> GetInputs()
+        {
+            return _inputList;
+        }
+
         public IList<CategoryModel> GetCategories()
         {
             return _categoryList;
