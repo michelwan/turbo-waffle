@@ -127,12 +127,15 @@ namespace TurboWaffle.View
 
         private void LstAccounting_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            UpdateDisplay(true);
-            CbxFlowType.SelectedItem = CbxFlowType.Items.Cast<FlowTypeView>().SingleOrDefault(c => c.Id.ToString() == e.Item.SubItems[(int)IndexColumn.FlowType].Tag.ToString());
-            CbxCategory.SelectedItem = CbxCategory.Items.Cast<CategoryView>().SingleOrDefault(c => c.Id.ToString() == e.Item.SubItems[(int)IndexColumn.Category].Tag.ToString());
-            DtpDate.Value = DateTime.ParseExact(e.Item.SubItems[(int)IndexColumn.Date].Text, Constants.DateTimeShortFormat, System.Globalization.CultureInfo.InvariantCulture);
-            TxtDescription.Text = e.Item.SubItems[(int)IndexColumn.Description].Text;
-            TxtAmount.Text = e.Item.SubItems[(int)IndexColumn.Amount].Text;
+            if (e.IsSelected)
+            {
+                UpdateDisplay(true);
+                CbxFlowType.SelectedItem = CbxFlowType.Items.Cast<FlowTypeView>().SingleOrDefault(c => c.Id.ToString() == e.Item.SubItems[(int)IndexColumn.FlowType].Tag.ToString());
+                CbxCategory.SelectedItem = CbxCategory.Items.Cast<CategoryView>().SingleOrDefault(c => c.Id.ToString() == e.Item.SubItems[(int)IndexColumn.Category].Tag.ToString());
+                DtpDate.Value = DateTime.ParseExact(e.Item.SubItems[(int)IndexColumn.Date].Text, Constants.DateTimeShortFormat, System.Globalization.CultureInfo.InvariantCulture);
+                TxtDescription.Text = e.Item.SubItems[(int)IndexColumn.Description].Text;
+                TxtAmount.Text = e.Item.SubItems[(int)IndexColumn.Amount].Text;
+            }
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
@@ -188,7 +191,12 @@ namespace TurboWaffle.View
 
         void DeleteEvent(object sender, IdArgs e)
         {
-            LstAccounting.FindItemWithText(e.Id.ToString()).Remove();
+            if (LstAccounting.SelectedIndices.Count > 0)
+                for (int i = 0; i < LstAccounting.SelectedIndices.Count; i++)
+                {
+                    LstAccounting.Items[LstAccounting.SelectedIndices[i]].Selected = false;
+                }
+            LstAccounting.Items.Cast<ListViewItem>().SingleOrDefault(x => x.Tag.ToString() == e.Id.ToString()).Remove();
         }
         #endregion Attached events
     }
