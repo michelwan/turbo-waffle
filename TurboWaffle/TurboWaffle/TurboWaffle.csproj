@@ -48,11 +48,13 @@
     <Compile Include="Helper\InputArgs.cs" />
     <Compile Include="Model\AccountingModel.cs" />
     <Compile Include="Model\CategoryModel.cs" />
+    <Compile Include="Model\FlowTypeModel.cs" />
     <Compile Include="Model\InputModel.cs" />
     <Compile Include="Presenter\AccountingPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CategoryView.cs" />
+    <Compile Include="ViewModel\FlowTypeView.cs" />
     <Compile Include="ViewModel\InputView.cs" />
     <Compile Include="View\AccountingForm.cs">
       <SubType>Form</SubType>

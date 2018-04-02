@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TurboWaffle.Model
+﻿namespace TurboWaffle.Model
 {
     public class InputModel
     {
+        #region Properties
         public int Id { get; set; }
+        public int FkFlowType { get; set; }
         public int FkCategory { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
+        #endregion Properties
 
-        public InputModel(int id, int fkCategory, string description, decimal amount)
+        public InputModel(int id, int fkFlowType, int fkCategory, string description, decimal amount)
         {
             Id = id;
+            FkFlowType = fkFlowType;
             FkCategory = fkCategory;
             Description = description;
             Amount = amount;

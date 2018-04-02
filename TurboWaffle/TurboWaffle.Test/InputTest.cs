@@ -14,11 +14,12 @@ namespace TurboWaffle.Test
             var m_Model = new AccountingModel();
             m_Model.AddEvent += SaveEvt;
             var presenter = new AccountingPresenter(m_Model);
-            presenter.Add(1, "Test", 10);
+            presenter.Add(1, 1, "Test", 10);
         }
 
         void SaveEvt(object sender, InputArgs e)
         {
+            Assert.AreEqual(1, e.FkFlowType);
             Assert.AreEqual(1, e.FkCategory);
             Assert.AreEqual("Test", e.Description);
             Assert.AreEqual(10, e.Amount);

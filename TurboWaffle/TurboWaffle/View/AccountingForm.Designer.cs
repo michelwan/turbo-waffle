@@ -37,6 +37,8 @@
             this.CbxCategory = new System.Windows.Forms.ComboBox();
             this.TxtAmount = new System.Windows.Forms.TextBox();
             this.TxtDescription = new System.Windows.Forms.TextBox();
+            this.CbxFlowType = new System.Windows.Forms.ComboBox();
+            this.HeaderFlowType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // BtnAdd
@@ -53,6 +55,7 @@
             // 
             this.LstAccounting.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.HeaderId,
+            this.HeaderFlowType,
             this.HeaderCategory,
             this.HeaderDescription,
             this.HeaderAmount});
@@ -104,11 +107,26 @@
             this.TxtDescription.Size = new System.Drawing.Size(100, 20);
             this.TxtDescription.TabIndex = 5;
             // 
+            // CbxFlowType
+            // 
+            this.CbxFlowType.DisplayMember = "Description";
+            this.CbxFlowType.FormattingEnabled = true;
+            this.CbxFlowType.Location = new System.Drawing.Point(310, 32);
+            this.CbxFlowType.Name = "CbxFlowType";
+            this.CbxFlowType.Size = new System.Drawing.Size(121, 21);
+            this.CbxFlowType.TabIndex = 10;
+            this.CbxFlowType.ValueMember = "Id";
+            // 
+            // HeaderFlowType
+            // 
+            this.HeaderFlowType.Text = "Flow type";
+            // 
             // AccountingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CbxFlowType);
             this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.LstAccounting);
             this.Controls.Add(this.CbxCategory);
@@ -132,5 +150,7 @@
         private System.Windows.Forms.ComboBox CbxCategory;
         private System.Windows.Forms.TextBox TxtAmount;
         private System.Windows.Forms.TextBox TxtDescription;
+        private System.Windows.Forms.ComboBox CbxFlowType;
+        private System.Windows.Forms.ColumnHeader HeaderFlowType;
     }
 }

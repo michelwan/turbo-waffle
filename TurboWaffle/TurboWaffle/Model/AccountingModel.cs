@@ -7,34 +7,34 @@ namespace TurboWaffle.Model
 {
     public class AccountingModel
     {
-        private int _inputIndex;
-        private List<InputModel> _inputList;
-        private List<CategoryModel> _categoryList;
-
-        public event EventHandler<InputArgs> AddEvent;
-
-        public AccountingModel()
-        {
-            _inputList = new List<InputModel>();
-            _categoryList = new List<CategoryModel>()
+        private int _inputIndex = 1;
+        private List<InputModel> _inputList = new List<InputModel>();
+        private static readonly List<CategoryModel> _categoryList = new List<CategoryModel>()
             {
                 new CategoryModel(1, "Transport"),
                 new CategoryModel(2, "Course"),
                 new CategoryModel(3, "Restaurant")
             };
-            _inputIndex = 1;
-        }
+        private static readonly List<FlowTypeModel> _flowTypeList = new List<FlowTypeModel>()
+            {
+                new FlowTypeModel(1, "Out"),
+                new FlowTypeModel(2, "In"),
+                new FlowTypeModel(3, "Lend"),
+                new FlowTypeModel(4, "Borrowing")
+            };
 
-        public void AddInput(int fkCategory, string description, decimal amount)
+        public event EventHandler<InputArgs> AddEvent;
+
+        public void AddInput(int fkFlowType, int fkCategory, string description, decimal amount)
         {
-            _inputList.Add(new InputModel(_inputIndex, fkCategory, description, amount));
+            _inputList.Add(new InputModel(_inputIndex, fkFlowType, fkCategory, description, amount));
             _inputIndex++;
             RaiseAddEvent(_inputList.Last());
         }
 
         public void RaiseAddEvent(InputModel model)
         {
-            AddEvent(this, new InputArgs(model.Id, model.FkCategory, model.Description, model.Amount));
+            AddEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Description, model.Amount));
         }
 
         public IList<CategoryModel> GetCategories()
@@ -42,9 +42,19 @@ namespace TurboWaffle.Model
             return _categoryList;
         }
 
+        public IList<FlowTypeModel> GetFlowTypes()
+        {
+            return _flowTypeList;
+        }
+
         public CategoryModel GetCategoryById(int id)
         {
             return _categoryList.SingleOrDefault(x => x.Id == id);
+        }
+
+        public FlowTypeModel GetFlowTypeById(int id)
+        {
+            return _flowTypeList.SingleOrDefault(x => x.Id == id);
         }
     }
 }
