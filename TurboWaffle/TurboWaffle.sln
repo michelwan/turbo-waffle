@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboWaffle", "TurboWaffle\TurboWaffle.csproj", "{89742654-C554-4F0D-A33F-4C603AF8907E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboWaffle.Test", "TurboWaffle.Test\TurboWaffle.Test.csproj", "{EB662F7B-FE26-4E1F-ACB2-675F2907DD79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{89742654-C554-4F0D-A33F-4C603AF8907E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89742654-C554-4F0D-A33F-4C603AF8907E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89742654-C554-4F0D-A33F-4C603AF8907E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB662F7B-FE26-4E1F-ACB2-675F2907DD79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB662F7B-FE26-4E1F-ACB2-675F2907DD79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB662F7B-FE26-4E1F-ACB2-675F2907DD79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB662F7B-FE26-4E1F-ACB2-675F2907DD79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

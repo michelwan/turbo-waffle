@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TurboWaffle.Model;
+using TurboWaffle.View;
 
 namespace TurboWaffle
 {
@@ -16,7 +18,10 @@ namespace TurboWaffle
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            var model = new AccountingModel();
+
+            var view = new AccountingForm(model);
+            Application.Run(view);
         }
     }
 }
