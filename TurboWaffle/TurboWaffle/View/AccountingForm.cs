@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using TurboWaffle.Helper;
 using TurboWaffle.Model;
@@ -34,6 +35,7 @@ namespace TurboWaffle.View
             foreach (var c in _presenter.GetCategories())
                 CbxCategory.Items.Add(c);
             _model.AddEvent += SaveEvent;
+            _model.UpdateEvent += UpdateEvent;
         }
 
         private void ClearForm()
@@ -42,6 +44,23 @@ namespace TurboWaffle.View
             CbxCategory.SelectedIndex = -1;
             TxtDescription.Text = string.Empty;
             TxtAmount.Text = string.Empty;
+        }
+
+        private void UpdateDisplay(bool isEditMode = true)
+        {
+            ClearForm();
+            if (isEditMode)
+            {
+                BtnAdd.Hide();
+                BtnUpdate.Show();
+                BtnCancel.Show();
+            }
+            else
+            {
+                BtnAdd.Show();
+                BtnUpdate.Hide();
+                BtnCancel.Hide();
+            }
         }
 
         #region Form events
@@ -55,17 +74,48 @@ namespace TurboWaffle.View
         {
             ClearForm();
         }
+
+        private void LstAccounting_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            UpdateDisplay(true);
+            CbxFlowType.SelectedItem = CbxFlowType.Items.Cast<FlowTypeView>().SingleOrDefault(c => c.Id.ToString() == e.Item.SubItems[1].Tag.ToString());
+            CbxCategory.SelectedItem = CbxCategory.Items.Cast<CategoryView>().SingleOrDefault(c => c.Id.ToString() == e.Item.SubItems[2].Tag.ToString());
+            TxtDescription.Text = e.Item.SubItems[3].Text;
+            TxtAmount.Text = e.Item.SubItems[4].Text;
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            UpdateDisplay(false);
+        }
+
+        private void BtnUpdate_Click(object sender, EventArgs e)
+        {
+            _presenter.Update(int.Parse(LstAccounting.SelectedItems[0].SubItems[0].Text), _selectedFlowType, _selectedCategory, TxtDescription.Text, _amount);
+            UpdateDisplay(false);
+        }
         #endregion Form events
 
         #region Attached events
         private void SaveEvent(object sender, InputArgs e)
         {
-            var item2 = new ListViewItem(e.Get());
-            item2.SubItems[1].Text = _presenter.GetFlowTypeDescription(e.FkFlowType);
-            item2.SubItems[1].Tag = e.FkFlowType.ToString();
-            item2.SubItems[2].Text = _presenter.GetCategoryDescription(e.FkCategory);
-            item2.SubItems[2].Tag = e.FkCategory.ToString();
-            LstAccounting.Items.Add(item2);
+            var item = new ListViewItem(e.Get());
+            item.SubItems[1].Text = _presenter.GetFlowTypeDescription(e.FkFlowType);
+            item.SubItems[1].Tag = e.FkFlowType.ToString();
+            item.SubItems[2].Text = _presenter.GetCategoryDescription(e.FkCategory);
+            item.SubItems[2].Tag = e.FkCategory.ToString();
+            LstAccounting.Items.Add(item);
+        }
+
+        void UpdateEvent(object sender, InputArgs e)
+        {
+            var item = LstAccounting.FindItemWithText(e.Id.ToString());
+            item.SubItems[1].Text = _presenter.GetFlowTypeDescription(e.FkFlowType);
+            item.SubItems[1].Tag = e.FkFlowType.ToString();
+            item.SubItems[2].Text = _presenter.GetCategoryDescription(e.FkCategory);
+            item.SubItems[2].Tag = e.FkCategory.ToString();
+            item.SubItems[3].Text = e.Description;
+            item.SubItems[4].Text = e.Amount.ToString();
         }
         #endregion Attached events
     }

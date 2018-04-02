@@ -44,6 +44,8 @@
             this.LblDescription = new System.Windows.Forms.Label();
             this.LblAmount = new System.Windows.Forms.Label();
             this.BtnReset = new System.Windows.Forms.Button();
+            this.BtnUpdate = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnAdd
@@ -71,6 +73,7 @@
             this.LstAccounting.TabIndex = 8;
             this.LstAccounting.UseCompatibleStateImageBehavior = false;
             this.LstAccounting.View = System.Windows.Forms.View.Details;
+            this.LstAccounting.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.LstAccounting_ItemSelectionChanged);
             // 
             // HeaderId
             // 
@@ -172,11 +175,35 @@
             this.BtnReset.UseVisualStyleBackColor = true;
             this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
+            // BtnUpdate
+            // 
+            this.BtnUpdate.Location = new System.Drawing.Point(713, 52);
+            this.BtnUpdate.Name = "BtnUpdate";
+            this.BtnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.BtnUpdate.TabIndex = 16;
+            this.BtnUpdate.Text = "Update";
+            this.BtnUpdate.UseVisualStyleBackColor = true;
+            this.BtnUpdate.Visible = false;
+            this.BtnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
+            // 
+            // BtnCancel
+            // 
+            this.BtnCancel.Location = new System.Drawing.Point(632, 52);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(75, 23);
+            this.BtnCancel.TabIndex = 17;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.Visible = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
             // AccountingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnUpdate);
             this.Controls.Add(this.BtnReset);
             this.Controls.Add(this.LblAmount);
             this.Controls.Add(this.LblDescription);
@@ -213,5 +240,7 @@
         private System.Windows.Forms.Label LblDescription;
         private System.Windows.Forms.Label LblAmount;
         private System.Windows.Forms.Button BtnReset;
+        private System.Windows.Forms.Button BtnUpdate;
+        private System.Windows.Forms.Button BtnCancel;
     }
 }

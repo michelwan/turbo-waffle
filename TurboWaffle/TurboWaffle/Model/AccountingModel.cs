@@ -24,6 +24,7 @@ namespace TurboWaffle.Model
             };
 
         public event EventHandler<InputArgs> AddEvent;
+        public event EventHandler<InputArgs> UpdateEvent;
 
         public void AddInput(int fkFlowType, int fkCategory, string description, decimal amount)
         {
@@ -32,10 +33,26 @@ namespace TurboWaffle.Model
             RaiseAddEvent(_inputList.Last());
         }
 
+        public void UpdateInput(int id, int fkFlowType, int fkCategory, string description, decimal amount)
+        {
+            var item = _inputList.SingleOrDefault(x => x.Id == id);
+            item.FkFlowType = fkFlowType;
+            item.FkCategory = fkCategory;
+            item.Description = description;
+            item.Amount = amount;
+            RaiseUpdateEvent(item);
+        }
+
+        #region Raise events
         public void RaiseAddEvent(InputModel model)
         {
             AddEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Description, model.Amount));
         }
+        public void RaiseUpdateEvent(InputModel model)
+        {
+            UpdateEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Description, model.Amount));
+        }
+        #endregion Raise events
 
         public IList<CategoryModel> GetCategories()
         {

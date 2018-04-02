@@ -19,6 +19,11 @@ namespace TurboWaffle.Presenter
             m_Model.AddInput(fkFlowType, fkCategory, description, amount);
         }
 
+        public void Update(int id, int fkFlowType, int fkCategory, string description, decimal amount)
+        {
+            m_Model.UpdateInput(id, fkFlowType, fkCategory, description, amount);
+        }
+
         public IEnumerable<CategoryView> GetCategories()
         {
             return m_Model.GetCategories()
