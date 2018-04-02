@@ -21,7 +21,7 @@ namespace TurboWaffle.Model
                     _categoryList = new List<CategoryModel>();
                     var xmlDoc = new XmlDocument();
                     xmlDoc.Load(Constants.Path.FlowType);
-                    foreach (XmlNode c in xmlDoc.GetElementsByTagName("Category"))
+                    foreach (XmlNode c in xmlDoc.GetElementsByTagName(Constants.XmlElement.Category))
                     {
                         _categoryList.Add(new CategoryModel(
                             int.Parse(c.Attributes[Constants.XmlAttribute.Id].Value),
@@ -43,7 +43,7 @@ namespace TurboWaffle.Model
                     _flowTypeList = new List<FlowTypeModel>();
                     var xmlDoc = new XmlDocument();
                     xmlDoc.Load(Constants.Path.FlowType);
-                    foreach (XmlNode ft in xmlDoc.GetElementsByTagName("FlowType"))
+                    foreach (XmlNode ft in xmlDoc.GetElementsByTagName(Constants.XmlElement.FlowType))
                     {
                         _flowTypeList.Add(new FlowTypeModel(
                             int.Parse(ft.Attributes[Constants.XmlAttribute.Id].Value),
