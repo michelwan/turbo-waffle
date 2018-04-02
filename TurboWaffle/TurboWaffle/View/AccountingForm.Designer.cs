@@ -49,6 +49,7 @@
             this.DtpDate = new System.Windows.Forms.DateTimePicker();
             this.LblDate = new System.Windows.Forms.Label();
             this.HeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LblMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnAdd
@@ -71,6 +72,7 @@
             this.HeaderAmount});
             this.LstAccounting.FullRowSelect = true;
             this.LstAccounting.Location = new System.Drawing.Point(12, 81);
+            this.LstAccounting.MultiSelect = false;
             this.LstAccounting.Name = "LstAccounting";
             this.LstAccounting.Size = new System.Drawing.Size(776, 357);
             this.LstAccounting.TabIndex = 8;
@@ -90,13 +92,11 @@
             // 
             // HeaderDescription
             // 
-            this.HeaderDescription.DisplayIndex = 3;
             this.HeaderDescription.Text = "Description";
-            this.HeaderDescription.Width = 154;
+            this.HeaderDescription.Width = 311;
             // 
             // HeaderAmount
             // 
-            this.HeaderAmount.DisplayIndex = 4;
             this.HeaderAmount.Text = "Amount";
             this.HeaderAmount.Width = 83;
             // 
@@ -236,11 +236,22 @@
             this.HeaderDate.Text = "Date";
             this.HeaderDate.Width = 102;
             // 
+            // LblMessage
+            // 
+            this.LblMessage.AutoSize = true;
+            this.LblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblMessage.ForeColor = System.Drawing.Color.DarkRed;
+            this.LblMessage.Location = new System.Drawing.Point(98, 57);
+            this.LblMessage.Name = "LblMessage";
+            this.LblMessage.Size = new System.Drawing.Size(0, 13);
+            this.LblMessage.TabIndex = 21;
+            // 
             // AccountingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LblMessage);
             this.Controls.Add(this.LblDate);
             this.Controls.Add(this.DtpDate);
             this.Controls.Add(this.BtnDelete);
@@ -287,5 +298,6 @@
         private System.Windows.Forms.DateTimePicker DtpDate;
         private System.Windows.Forms.Label LblDate;
         private System.Windows.Forms.ColumnHeader HeaderDate;
+        private System.Windows.Forms.Label LblMessage;
     }
 }

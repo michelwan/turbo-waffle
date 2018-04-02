@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using TurboWaffle.Helper;
 
 namespace TurboWaffle.Model
@@ -9,19 +10,50 @@ namespace TurboWaffle.Model
     {
         private int _inputIndex = 1;
         private List<InputModel> _inputList = new List<InputModel>();
-        private static readonly List<CategoryModel> _categoryList = new List<CategoryModel>()
+
+        private List<CategoryModel> _categoryList;
+        private List<CategoryModel> CategoryList
+        {
+            get
             {
-                new CategoryModel(1, "Transport"),
-                new CategoryModel(2, "Course"),
-                new CategoryModel(3, "Restaurant")
-            };
-        private static readonly List<FlowTypeModel> _flowTypeList = new List<FlowTypeModel>()
+                if (_categoryList == null)
+                {
+                    _categoryList = new List<CategoryModel>();
+                    var xmlDoc = new XmlDocument();
+                    xmlDoc.Load(Constants.Path.FlowType);
+                    foreach (XmlNode c in xmlDoc.GetElementsByTagName("Category"))
+                    {
+                        _categoryList.Add(new CategoryModel(
+                            int.Parse(c.Attributes[Constants.XmlAttribute.Id].Value),
+                            c.Attributes[Constants.XmlAttribute.Description].Value
+                        ));
+                    }
+                }
+                return _categoryList;
+            }
+        }
+
+        private List<FlowTypeModel> _flowTypeList;
+        private List<FlowTypeModel> FlowTypeList
+        {
+            get
             {
-                new FlowTypeModel(1, "Out"),
-                new FlowTypeModel(2, "In"),
-                new FlowTypeModel(3, "Lend"),
-                new FlowTypeModel(4, "Borrowing")
-            };
+                if (_flowTypeList == null)
+                {
+                    _flowTypeList = new List<FlowTypeModel>();
+                    var xmlDoc = new XmlDocument();
+                    xmlDoc.Load(Constants.Path.FlowType);
+                    foreach (XmlNode ft in xmlDoc.GetElementsByTagName("FlowType"))
+                    {
+                        _flowTypeList.Add(new FlowTypeModel(
+                            int.Parse(ft.Attributes[Constants.XmlAttribute.Id].Value),
+                            ft.Attributes[Constants.XmlAttribute.Description].Value
+                        ));
+                    }
+                }
+                return _flowTypeList;
+            }
+        }
 
         #region Events
         public event EventHandler<InputArgs> AddEvent;
@@ -75,22 +107,22 @@ namespace TurboWaffle.Model
 
         public IList<CategoryModel> GetCategories()
         {
-            return _categoryList;
+            return CategoryList;
         }
 
         public IList<FlowTypeModel> GetFlowTypes()
         {
-            return _flowTypeList;
+            return FlowTypeList;
         }
 
         public CategoryModel GetCategoryById(int id)
         {
-            return _categoryList.SingleOrDefault(x => x.Id == id);
+            return CategoryList.SingleOrDefault(x => x.Id == id);
         }
 
         public FlowTypeModel GetFlowTypeById(int id)
         {
-            return _flowTypeList.SingleOrDefault(x => x.Id == id);
+            return FlowTypeList.SingleOrDefault(x => x.Id == id);
         }
     }
 }

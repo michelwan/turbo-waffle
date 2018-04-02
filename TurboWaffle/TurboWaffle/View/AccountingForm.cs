@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using TurboWaffle.Helper;
 using TurboWaffle.Model;
 using TurboWaffle.Presenter;
+using TurboWaffle.Properties;
 using TurboWaffle.ViewModel;
 
 namespace TurboWaffle.View
@@ -14,14 +15,41 @@ namespace TurboWaffle.View
         private readonly AccountingModel _model;
 
         private int _selectedId { get { return int.Parse(LstAccounting.SelectedItems[0].Tag.ToString()); } }
-        private int _selectedFlowType { get { return ((FlowTypeView)CbxFlowType.SelectedItem).Id; } }
-        private int _selectedCategory { get { return ((CategoryView)CbxCategory.SelectedItem).Id; } }
-        private decimal _amount
+        private int _selectedFlowType
         {
             get
             {
+                if (CbxFlowType.SelectedIndex == -1)
+                    throw new Exception(Resources.MsgFormFkFlowTypeMissing);
+                return ((FlowTypeView)CbxFlowType.SelectedItem).Id;
+            }
+        }
+        private int _selectedCategory
+        {
+            get
+            {
+                if (CbxCategory.SelectedIndex == -1)
+                    throw new Exception(Resources.MsgFormFkCategoryMissing);
+                return ((CategoryView)CbxCategory.SelectedItem).Id;
+            }
+        }
+        private string _descriptionProvided
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(TxtDescription.Text.Trim()))
+                    throw new Exception(Resources.MsgFormDescriptionMissing);
+                return TxtDescription.Text.Trim();
+            }
+        }
+        private decimal _amountProvided
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(TxtAmount.Text.Trim()))
+                    throw new Exception(Resources.MsgFormAmountMissing);
                 if (!decimal.TryParse(TxtAmount.Text, out decimal amount))
-                    return 0;
+                    throw new Exception(Resources.MsgFormAmountInvalideFormat);
                 return amount;
             }
         }
@@ -56,6 +84,7 @@ namespace TurboWaffle.View
             DtpDate.Value = DateTime.Now;
             TxtDescription.Text = string.Empty;
             TxtAmount.Text = string.Empty;
+            LblMessage.Text = string.Empty;
         }
 
         private void UpdateDisplay(bool isEditMode = true)
@@ -80,13 +109,20 @@ namespace TurboWaffle.View
         #region Form events
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            _presenter.Add(_selectedFlowType, _selectedCategory, DtpDate.Value, TxtDescription.Text, _amount);
-            ClearForm();
+            try
+            {
+                _presenter.Add(_selectedFlowType, _selectedCategory, DtpDate.Value, _descriptionProvided, _amountProvided);
+                ClearForm();
+            }
+            catch(Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+            }
         }
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
-            ClearForm();
+            UpdateDisplay(false);
         }
 
         private void LstAccounting_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -106,8 +142,15 @@ namespace TurboWaffle.View
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            _presenter.Update(_selectedId, _selectedFlowType, _selectedCategory, DtpDate.Value, TxtDescription.Text, _amount);
-            UpdateDisplay(false);
+            try
+            {
+                _presenter.Update(_selectedId, _selectedFlowType, _selectedCategory, DtpDate.Value, _descriptionProvided, _amountProvided);
+                UpdateDisplay(false);
+            }
+            catch (Exception ex)
+            {
+                LblMessage.Text = ex.Message;
+            }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)

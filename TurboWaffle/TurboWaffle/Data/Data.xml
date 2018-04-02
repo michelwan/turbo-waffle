@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+  <FlowTypes>
+    <FlowType Id="1" Description= "In"/>
+    <FlowType Id="2" Description= "Out"/>
+    <FlowType Id="3" Description= "Lend"/>
+    <FlowType Id="4" Description= "Borrowing"/>
+  </FlowTypes>
+  <Categories>
+    <Category Id="1" Description= "Restaurant"/>
+    <Category Id="2" Description= "Salaire"/>
+    <Category Id="3" Description= "Transport"/>
+    <Category Id="4" Description= "Course"/>
+  </Categories>
+</Data>
