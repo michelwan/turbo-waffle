@@ -61,6 +61,21 @@ namespace TurboWaffle.Model
         public event EventHandler<IdArgs> DeleteEvent;
         #endregion Events
 
+        #region Raise events
+        public void RaiseAddEvent(InputModel model)
+        {
+            AddEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Date, model.Description, model.Amount));
+        }
+        public void RaiseUpdateEvent(InputModel model)
+        {
+            UpdateEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Date, model.Description, model.Amount));
+        }
+        public void RaiseDeleteEvent(int id)
+        {
+            DeleteEvent(this, new IdArgs(id));
+        }
+        #endregion Raise events
+
         public void AddInput(int fkFlowType, int fkCategory, DateTime date, string description, decimal amount)
         {
             _inputList.Add(new InputModel(_inputIndex, fkFlowType, fkCategory, date, description, amount));
@@ -84,21 +99,6 @@ namespace TurboWaffle.Model
             _inputList.Remove(_inputList.Single(x => x.Id == id));
             RaiseDeleteEvent(id);
         }
-
-        #region Raise events
-        public void RaiseAddEvent(InputModel model)
-        {
-            AddEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Date, model.Description, model.Amount));
-        }
-        public void RaiseUpdateEvent(InputModel model)
-        {
-            UpdateEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Date, model.Description, model.Amount));
-        }
-        public void RaiseDeleteEvent(int id)
-        {
-            DeleteEvent(this, new IdArgs(id));
-        }
-        #endregion Raise events
 
         public IList<InputModel> GetInputs()
         {
