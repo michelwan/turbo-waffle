@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\Constants.cs" />
     <Compile Include="Helper\IdArgs.cs" />
     <Compile Include="Helper\InputArgs.cs" />
     <Compile Include="Model\AccountingModel.cs" />

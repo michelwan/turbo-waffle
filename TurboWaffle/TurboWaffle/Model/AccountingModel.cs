@@ -29,18 +29,19 @@ namespace TurboWaffle.Model
         public event EventHandler<IdArgs> DeleteEvent;
         #endregion Events
 
-        public void AddInput(int fkFlowType, int fkCategory, string description, decimal amount)
+        public void AddInput(int fkFlowType, int fkCategory, DateTime date, string description, decimal amount)
         {
-            _inputList.Add(new InputModel(_inputIndex, fkFlowType, fkCategory, description, amount));
+            _inputList.Add(new InputModel(_inputIndex, fkFlowType, fkCategory, date, description, amount));
             _inputIndex++;
             RaiseAddEvent(_inputList.Last());
         }
 
-        public void UpdateInput(int id, int fkFlowType, int fkCategory, string description, decimal amount)
+        public void UpdateInput(int id, int fkFlowType, int fkCategory, DateTime date, string description, decimal amount)
         {
             var item = _inputList.SingleOrDefault(x => x.Id == id);
             item.FkFlowType = fkFlowType;
             item.FkCategory = fkCategory;
+            item.Date = date;
             item.Description = description;
             item.Amount = amount;
             RaiseUpdateEvent(item);
@@ -55,11 +56,11 @@ namespace TurboWaffle.Model
         #region Raise events
         public void RaiseAddEvent(InputModel model)
         {
-            AddEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Description, model.Amount));
+            AddEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Date, model.Description, model.Amount));
         }
         public void RaiseUpdateEvent(InputModel model)
         {
-            UpdateEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Description, model.Amount));
+            UpdateEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Date, model.Description, model.Amount));
         }
         public void RaiseDeleteEvent(int id)
         {

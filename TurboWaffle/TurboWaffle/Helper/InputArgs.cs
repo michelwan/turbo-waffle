@@ -8,22 +8,24 @@ namespace TurboWaffle.Helper
         public int Id { get; set; }
         public int FkFlowType { get; set; }
         public int FkCategory { get; set; }
+        public DateTime Date { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
         #endregion Properties
 
-        public InputArgs(int id, int fkFlowType, int fkCategory, string description, decimal amount)
+        public InputArgs(int id, int fkFlowType, int fkCategory, DateTime date, string description, decimal amount)
         {
             Id = id;
             FkFlowType = fkFlowType;
             FkCategory = fkCategory;
+            Date = date;
             Description = description;
             Amount = amount;
         }
 
         public string[] Get()
         {
-            return new[] { Id.ToString(), FkFlowType.ToString(), FkCategory.ToString(), Description, Amount.ToString() };
+            return new[] { FkFlowType.ToString(), FkCategory.ToString(), Date.ToString(Constants.DateTimeShortFormat), Description, Amount.ToString() };
         }
     }
 }

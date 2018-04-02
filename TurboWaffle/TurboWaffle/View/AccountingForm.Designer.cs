@@ -30,7 +30,6 @@
         {
             this.BtnAdd = new System.Windows.Forms.Button();
             this.LstAccounting = new System.Windows.Forms.ListView();
-            this.HeaderId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.HeaderFlowType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.HeaderCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.HeaderDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -47,6 +46,9 @@
             this.BtnUpdate = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
+            this.DtpDate = new System.Windows.Forms.DateTimePicker();
+            this.LblDate = new System.Windows.Forms.Label();
+            this.HeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // BtnAdd
@@ -62,9 +64,9 @@
             // LstAccounting
             // 
             this.LstAccounting.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.HeaderId,
             this.HeaderFlowType,
             this.HeaderCategory,
+            this.HeaderDate,
             this.HeaderDescription,
             this.HeaderAmount});
             this.LstAccounting.FullRowSelect = true;
@@ -76,25 +78,27 @@
             this.LstAccounting.View = System.Windows.Forms.View.Details;
             this.LstAccounting.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.LstAccounting_ItemSelectionChanged);
             // 
-            // HeaderId
-            // 
-            this.HeaderId.Text = "Id";
-            // 
             // HeaderFlowType
             // 
             this.HeaderFlowType.Text = "Flow type";
+            this.HeaderFlowType.Width = 86;
             // 
             // HeaderCategory
             // 
             this.HeaderCategory.Text = "Category";
+            this.HeaderCategory.Width = 73;
             // 
             // HeaderDescription
             // 
+            this.HeaderDescription.DisplayIndex = 3;
             this.HeaderDescription.Text = "Description";
+            this.HeaderDescription.Width = 154;
             // 
             // HeaderAmount
             // 
+            this.HeaderAmount.DisplayIndex = 4;
             this.HeaderAmount.Text = "Amount";
+            this.HeaderAmount.Width = 83;
             // 
             // CbxCategory
             // 
@@ -115,9 +119,9 @@
             // 
             // TxtDescription
             // 
-            this.TxtDescription.Location = new System.Drawing.Point(266, 26);
+            this.TxtDescription.Location = new System.Drawing.Point(366, 26);
             this.TxtDescription.Name = "TxtDescription";
-            this.TxtDescription.Size = new System.Drawing.Size(416, 20);
+            this.TxtDescription.Size = new System.Drawing.Size(316, 20);
             this.TxtDescription.TabIndex = 5;
             // 
             // CbxFlowType
@@ -151,7 +155,7 @@
             // LblDescription
             // 
             this.LblDescription.AutoSize = true;
-            this.LblDescription.Location = new System.Drawing.Point(263, 9);
+            this.LblDescription.Location = new System.Drawing.Point(363, 9);
             this.LblDescription.Name = "LblDescription";
             this.LblDescription.Size = new System.Drawing.Size(60, 13);
             this.LblDescription.TabIndex = 13;
@@ -209,11 +213,36 @@
             this.BtnDelete.Visible = false;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
+            // DtpDate
+            // 
+            this.DtpDate.CustomFormat = "yyyy-MM-dd";
+            this.DtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtpDate.Location = new System.Drawing.Point(266, 26);
+            this.DtpDate.Name = "DtpDate";
+            this.DtpDate.Size = new System.Drawing.Size(94, 20);
+            this.DtpDate.TabIndex = 19;
+            // 
+            // LblDate
+            // 
+            this.LblDate.AutoSize = true;
+            this.LblDate.Location = new System.Drawing.Point(263, 9);
+            this.LblDate.Name = "LblDate";
+            this.LblDate.Size = new System.Drawing.Size(60, 13);
+            this.LblDate.TabIndex = 20;
+            this.LblDate.Text = "Description";
+            // 
+            // HeaderDate
+            // 
+            this.HeaderDate.Text = "Date";
+            this.HeaderDate.Width = 102;
+            // 
             // AccountingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LblDate);
+            this.Controls.Add(this.DtpDate);
             this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnUpdate);
@@ -239,7 +268,6 @@
 
         private System.Windows.Forms.Button BtnAdd;
         private System.Windows.Forms.ListView LstAccounting;
-        private System.Windows.Forms.ColumnHeader HeaderId;
         private System.Windows.Forms.ColumnHeader HeaderCategory;
         private System.Windows.Forms.ColumnHeader HeaderDescription;
         private System.Windows.Forms.ColumnHeader HeaderAmount;
@@ -256,5 +284,8 @@
         private System.Windows.Forms.Button BtnUpdate;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Button BtnDelete;
+        private System.Windows.Forms.DateTimePicker DtpDate;
+        private System.Windows.Forms.Label LblDate;
+        private System.Windows.Forms.ColumnHeader HeaderDate;
     }
 }

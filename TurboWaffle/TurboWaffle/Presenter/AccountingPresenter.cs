@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TurboWaffle.Model;
 using TurboWaffle.ViewModel;
@@ -14,14 +15,14 @@ namespace TurboWaffle.Presenter
             this._model = model;
         }
 
-        public void Add(int fkFlowType, int fkCategory, string description, decimal amount)
+        public void Add(int fkFlowType, int fkCategory, DateTime date, string description, decimal amount)
         {
-            _model.AddInput(fkFlowType, fkCategory, description, amount);
+            _model.AddInput(fkFlowType, fkCategory, date, description, amount);
         }
 
-        public void Update(int id, int fkFlowType, int fkCategory, string description, decimal amount)
+        public void Update(int id, int fkFlowType, int fkCategory, DateTime date, string description, decimal amount)
         {
-            _model.UpdateInput(id, fkFlowType, fkCategory, description, amount);
+            _model.UpdateInput(id, fkFlowType, fkCategory, date, description, amount);
         }
 
         public void Delete(int id)

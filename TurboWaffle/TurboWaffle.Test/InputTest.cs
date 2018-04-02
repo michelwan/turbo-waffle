@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
 using TurboWaffle.Helper;
 using TurboWaffle.Model;
@@ -18,10 +19,10 @@ namespace TurboWaffle.Test
             model.DeleteEvent += DeleteEvt;
 
             var presenter = new AccountingPresenter(model);
-            presenter.Add(1, 1, "Test", 10);
+            presenter.Add(1, 1, new DateTime(2000, 01, 01), "Test", 10);
 
             var input = presenter.GetInputs().First();
-            presenter.Update(input.Id, 2, 3, "Test2", input.Amount * 2);
+            presenter.Update(input.Id, 2, 3, new DateTime(2018, 01, 01), "Test2", input.Amount * 2);
 
             presenter.Delete(1);
             Assert.AreEqual(0, presenter.GetInputs().Count());
@@ -31,6 +32,7 @@ namespace TurboWaffle.Test
         {
             Assert.AreEqual(1, e.FkFlowType);
             Assert.AreEqual(1, e.FkCategory);
+            Assert.AreEqual(new DateTime(2000, 01, 01), e.Date);
             Assert.AreEqual("Test", e.Description);
             Assert.AreEqual(10, e.Amount);
         }
@@ -39,6 +41,7 @@ namespace TurboWaffle.Test
         {
             Assert.AreEqual(2, e.FkFlowType);
             Assert.AreEqual(3, e.FkCategory);
+            Assert.AreEqual(new DateTime(2018, 01, 01), e.Date);
             Assert.AreEqual("Test2", e.Description);
             Assert.AreEqual(20, e.Amount);
         }
