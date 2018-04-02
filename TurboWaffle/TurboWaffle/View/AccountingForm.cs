@@ -36,6 +36,7 @@ namespace TurboWaffle.View
                 CbxCategory.Items.Add(c);
             _model.AddEvent += SaveEvent;
             _model.UpdateEvent += UpdateEvent;
+            _model.DeleteEvent += DeleteEvent;
         }
 
         private void ClearForm()
@@ -54,12 +55,14 @@ namespace TurboWaffle.View
                 BtnAdd.Hide();
                 BtnUpdate.Show();
                 BtnCancel.Show();
+                BtnDelete.Show();
             }
             else
             {
                 BtnAdd.Show();
                 BtnUpdate.Hide();
                 BtnCancel.Hide();
+                BtnDelete.Hide();
             }
         }
 
@@ -94,6 +97,12 @@ namespace TurboWaffle.View
             _presenter.Update(int.Parse(LstAccounting.SelectedItems[0].SubItems[0].Text), _selectedFlowType, _selectedCategory, TxtDescription.Text, _amount);
             UpdateDisplay(false);
         }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            _presenter.Delete(int.Parse(LstAccounting.SelectedItems[0].SubItems[0].Text));
+            UpdateDisplay(false);
+        }
         #endregion Form events
 
         #region Attached events
@@ -116,6 +125,11 @@ namespace TurboWaffle.View
             item.SubItems[2].Tag = e.FkCategory.ToString();
             item.SubItems[3].Text = e.Description;
             item.SubItems[4].Text = e.Amount.ToString();
+        }
+
+        void DeleteEvent(object sender, IdArgs e)
+        {
+            LstAccounting.FindItemWithText(e.Id.ToString()).Remove();
         }
         #endregion Attached events
     }

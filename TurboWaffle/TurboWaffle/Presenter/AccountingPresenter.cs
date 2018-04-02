@@ -24,6 +24,11 @@ namespace TurboWaffle.Presenter
             _model.UpdateInput(id, fkFlowType, fkCategory, description, amount);
         }
 
+        public void Delete(int id)
+        {
+            _model.DeleteInput(id);
+        }
+
         public IEnumerable<InputView> GetInputs()
         {
             return _model.GetInputs()

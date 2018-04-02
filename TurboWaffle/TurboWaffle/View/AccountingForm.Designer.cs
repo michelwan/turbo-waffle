@@ -46,6 +46,7 @@
             this.BtnReset = new System.Windows.Forms.Button();
             this.BtnUpdate = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnAdd
@@ -197,11 +198,23 @@
             this.BtnCancel.Visible = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // BtnDelete
+            // 
+            this.BtnDelete.Location = new System.Drawing.Point(551, 52);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(75, 23);
+            this.BtnDelete.TabIndex = 18;
+            this.BtnDelete.Text = "Delete";
+            this.BtnDelete.UseVisualStyleBackColor = true;
+            this.BtnDelete.Visible = false;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
             // AccountingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnUpdate);
             this.Controls.Add(this.BtnReset);
@@ -242,5 +255,6 @@
         private System.Windows.Forms.Button BtnReset;
         private System.Windows.Forms.Button BtnUpdate;
         private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Button BtnDelete;
     }
 }

@@ -23,8 +23,11 @@ namespace TurboWaffle.Model
                 new FlowTypeModel(4, "Borrowing")
             };
 
+        #region Events
         public event EventHandler<InputArgs> AddEvent;
         public event EventHandler<InputArgs> UpdateEvent;
+        public event EventHandler<IdArgs> DeleteEvent;
+        #endregion Events
 
         public void AddInput(int fkFlowType, int fkCategory, string description, decimal amount)
         {
@@ -43,6 +46,12 @@ namespace TurboWaffle.Model
             RaiseUpdateEvent(item);
         }
 
+        public void DeleteInput(int id)
+        {
+            _inputList.Remove(_inputList.Single(x => x.Id == id));
+            RaiseDeleteEvent(id);
+        }
+
         #region Raise events
         public void RaiseAddEvent(InputModel model)
         {
@@ -51,6 +60,10 @@ namespace TurboWaffle.Model
         public void RaiseUpdateEvent(InputModel model)
         {
             UpdateEvent(this, new InputArgs(model.Id, model.FkFlowType, model.FkCategory, model.Description, model.Amount));
+        }
+        public void RaiseDeleteEvent(int id)
+        {
+            DeleteEvent(this, new IdArgs(id));
         }
         #endregion Raise events
 
